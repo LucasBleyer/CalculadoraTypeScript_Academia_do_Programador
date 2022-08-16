@@ -12,25 +12,32 @@
 </head>
 <body>
   <div class="container">
-    <h1>Calculadora Tabajara</h1>
-    <label for="primeiroNumero">Primeiro Número</label>
-    <input id="primeiroNumero" type="number" value="0">
+    <div class="linha">
+      <div class="coluna">
+        <h1>Calculadora Tabajara</h1>
 
-    <label for="operador">Operador</label>
-    <select id="operador">
-      <option value="+">+</option>
-      <option value="-">-</option>
-      <option value="*">*</option>
-      <option value="/">/</option>
-    </select>
+        <label for="primeiroNumero">Primeiro Número</label>
+        <input id="primeiroNumero" type="number" value="0">
+    
+        <label for="operador">Operador</label>
+        <select id="operador">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+        </select>
+    
+        <label for="segundoNumero">Segundo Número</label>
+        <input id="segundoNumero" type="number" value="0">
+    
+        <button id="btnCalcular" type="button">Calcular</button>
+    
+        <h2 id="txtResultado"></h2>
+      </div>
 
-    <label for="segundoNumero">Segundo Número</label>
-    <input id="segundoNumero" type="number" value="0">
-
-    <button id="btnCalcular" type="button">Calcular</button>
-
-    <h2 id="txtResultado"></h2>
+      <div id="historico" class="coluna historico"></div>
+      
+    </div>
   </div>
-
 </body>
 </html>

@@ -1,28 +1,27 @@
 export class Calculadora {
-    // inicializa a lógica da classe
-    constructor(calculo) {
-        this.primeiroNumero = calculo.primeiroNumero;
-        this.segundoNumero = calculo.segundoNumero;
-        this.operador = calculo.operador;
+    constructor() {
+        this.historicoOperacoes = [];
     }
-    calcular() {
+    calcular(calculo) {
         let resultado = 0;
-        if (this.operador === "/" && this.segundoNumero === 0)
+        if (calculo.operador === "/" && calculo.segundoNumero === 0)
             return 0;
-        switch (this.operador) {
+        switch (calculo.operador) {
             case "+":
-                resultado = this.primeiroNumero + this.segundoNumero;
+                resultado = calculo.primeiroNumero + calculo.segundoNumero;
                 break;
             case "-":
-                resultado = this.primeiroNumero - this.segundoNumero;
+                resultado = calculo.primeiroNumero - calculo.segundoNumero;
                 break;
             case "*":
-                resultado = this.primeiroNumero * this.segundoNumero;
+                resultado = calculo.primeiroNumero * calculo.segundoNumero;
                 break;
             case "/":
-                resultado = this.primeiroNumero / this.segundoNumero;
+                resultado = calculo.primeiroNumero / calculo.segundoNumero;
                 break;
         }
+        const operacao = `${calculo.primeiroNumero} ${calculo.operador} ${calculo.segundoNumero} = ${resultado}`;
+        this.historicoOperacoes.push(operacao);
         return resultado;
     }
 }
