@@ -7,7 +7,7 @@ const txtSegundoNumero = document.getElementById("segundoNumero") as HTMLInputEl
 const selectOperador = document.getElementById("operador") as HTMLSelectElement;
 
 const btnCalcular = document.getElementById("btnCalcular") as HTMLButtonElement;
-const txtResultado = document.getElementById("txtResultado") as HTMLHeadingElement;
+const txtResultado = document.getElementById("txtResultado") as HTMLParagraphElement;
 const divHistorico = document.getElementById("historico") as HTMLDivElement;
 
 const calculadora = new Calculadora();
@@ -36,11 +36,11 @@ function calcular() {
 }
 
 function mostrarHistorico(){
-  divHistorico.style.display = "flex";
+  divHistorico.classList.remove("d-none");
 
   calculadora.historicoOperacoes.forEach((operacao: string) =>{
     const txtOperacao = document.createElement("h3") as HTMLHeadingElement;
-    txtOperacao.className = "card-historico";
+    txtOperacao.className = "alert alert-danger";
     txtOperacao.innerText = operacao;
 
     divHistorico.appendChild(txtOperacao);//vai estar adicionando um elemento dentro da div 

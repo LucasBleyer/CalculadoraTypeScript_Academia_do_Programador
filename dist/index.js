@@ -25,10 +25,10 @@ function calcular() {
     txtResultado.innerText = "O resultado é: " + resultado;
 }
 function mostrarHistorico() {
-    divHistorico.style.display = "flex";
+    divHistorico.classList.remove("d-none");
     calculadora.historicoOperacoes.forEach((operacao) => {
         const txtOperacao = document.createElement("h3");
-        txtOperacao.className = "card-historico";
+        txtOperacao.className = "alert alert-danger";
         txtOperacao.innerText = operacao;
         divHistorico.appendChild(txtOperacao); //vai estar adicionando um elemento dentro da div 
     });
