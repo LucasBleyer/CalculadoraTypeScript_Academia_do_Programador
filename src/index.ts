@@ -1,5 +1,6 @@
 import { Calculadora } from "./calculadora.js";
 import { Calculo } from "./calculo.type.js";
+import { repositorioLocalStorage } from "./repositorios/repositorioLocalStorage.js";
 
 // Data Binding
 const txtPrimeiroNumero = document.getElementById("primeiroNumero") as HTMLInputElement;
@@ -7,13 +8,15 @@ const txtSegundoNumero = document.getElementById("segundoNumero") as HTMLInputEl
 const selectOperador = document.getElementById("operador") as HTMLSelectElement;
 
 const btnCalcular = document.getElementById("btnCalcular") as HTMLButtonElement;
+const btnLimpar = document.getElementById("btnLimpar") as HTMLButtonElement;
+
 const txtResultado = document.getElementById("txtResultado") as HTMLParagraphElement;
 const divHistorico = document.getElementById("historico") as HTMLDivElement;
 
 const calculadora = new Calculadora();
+const repositorio = new repositorioLocalStorage();
 
 function calcular() {
-  let resultado: number = 0;
 
   const calculo: Calculo = {
     primeiroNumero: Number(txtPrimeiroNumero.value),
@@ -21,7 +24,9 @@ function calcular() {
     operador: selectOperador.options[selectOperador.selectedIndex].value
   }
 
-  resultado = calculadora.calcular(calculo);
+  const resultado = calculadora.calcular(calculo);
+
+  repositorio.inserir(calculadora.historicoOperacoes);
 
   if(calculadora.historicoOperacoes.length === 0)
   {
@@ -36,7 +41,12 @@ function calcular() {
 }
 
 function mostrarHistorico(){
-  divHistorico.classList.remove("d-none");
+  
+  calculadora.historicoOperacoes = repositorio.selecionarTodos();
+
+  if(calculadora.historicoOperacoes.length > 0){
+    divHistorico.classList.remove("d-none");
+  }
 
   calculadora.historicoOperacoes.forEach((operacao: string) =>{
     const txtOperacao = document.createElement("h3") as HTMLHeadingElement;
@@ -55,3 +65,9 @@ function limparOperacoes(){
 }
 
 btnCalcular.addEventListener("click", calcular);
+
+btnLimpar.addEventListener("click", () => {
+  repositorio.excluir();
+  divHistorico.classList.add("d-none");
+  mostrarHistorico();
+})
